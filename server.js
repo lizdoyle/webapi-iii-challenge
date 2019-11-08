@@ -9,7 +9,7 @@ const server = express();
 
 server.use(express.json());
 server.use('/posts', logger, postRoutes);
-server.use('./users',  logger, userRoutes);
+server.use('/users',  logger, userRoutes);
 
 server.get('/',logger, (req, res) => {
     res.send('Server is working');

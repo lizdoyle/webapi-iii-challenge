@@ -3,6 +3,8 @@ const router = express.Router();
 
 const userDb = require('./userDb');
 
+//get and delete requests don't have a req.body ... will cause errors
+
 
 router.post('/', validateUser, (req, res) => {
     const userInfo = req.body;
@@ -41,9 +43,9 @@ router.post('/:id/posts', validateUser, validatePost, validateUserId,  (req, res
 
 });
 
-router.get('/', validateUser, (req, res) => {
+router.get('/', (req, res) => {
     const users = req.body;
-    userDb.get()
+    userDb.get(users)
     .then(users => {
         res.status(200).json(users)
     })
@@ -53,7 +55,7 @@ router.get('/', validateUser, (req, res) => {
 
 });
 
-router.get('/:id', validateUser, validateUserId, (req, res) => {
+router.get('/:id', validateUserId, (req, res) => {
     const id = req.params.id;
 
     if(!id) {
