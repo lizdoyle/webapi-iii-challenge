@@ -7,7 +7,7 @@ const userRoutes = require('./users/userRouter');
 
 const server = express();
 
-
+server.use(express.json());
 server.use('/posts', logger, postRoutes);
 server.use('./users',  logger, userRoutes);
 
